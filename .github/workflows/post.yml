@@ -1,0 +1,23 @@
+name: post
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *'  # 毎日21時(JST)に実行（日本時間＝UTC+9）
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run start
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          ROOM_EMAIL: ${{ secrets.ROOM_EMAIL }}
+          ROOM_PASSWORD: ${{ secrets.ROOM_PASSWORD }}
+          ROOM_URL_NAME: ${{ secrets.ROOM_URL_NAME }}
