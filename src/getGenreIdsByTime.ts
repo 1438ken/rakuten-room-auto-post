@@ -15,8 +15,7 @@ const genres: Genres = {
   20: ["100433"], // インナー・下着・ナイトウェア
 };
 
-const getGenreIdsByTime = (hour: number): string[] => {
-  return genres[hour] || [];
-};
+export default function getGenreIdsByTime(hour: number): string[] {
+  return ["551177"]; // ← テスト用に常にメンズファッションを投稿
+}
 
-export default getGenreIdsByTime;
